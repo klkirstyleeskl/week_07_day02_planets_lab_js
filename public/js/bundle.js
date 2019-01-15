@@ -135,9 +135,9 @@ eval("const PubSub = __webpack_require__(/*! ../helpers/pub_sub.js */ \"./src/he
   !*** ./src/views/display_planet.js ***!
   \*************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-eval("throw new Error(\"Module parse failed: Unexpected token (24:7)\\nYou may need an appropriate loader to handle this file type.\\n|   compared to Earth. Its gravitational pull is ${planet.gravity} of Earth and it\\n|   has ${planet.moons}. Here is a photo wot I took on my holidays:`)\\n>   const.\\n| \\n|   resultSection.appendChild(planetParagraph);\");\n\n//# sourceURL=webpack:///./src/views/display_planet.js?");
+eval("const PubSub = __webpack_require__(/*! ../helpers/pub_sub.js */ \"./src/helpers/pub_sub.js\");\n\nconst DisplayPlanet = function () {\n\n};\n\nDisplayPlanet.prototype.bindEvents = function () {\n  PubSub.subscribe('SolarSystem:planet-selected', (event) => {\n    const result = event.detail;\n    this.renderInfo(result);\n  });\n};\n\nDisplayPlanet.prototype.renderInfo = function (planet) {\n  console.log('something hilarious');\n  const resultSection = document.querySelector('.planet-details');\n  resultSection.innerHTML = \"\"\n  const planetParagraph = document.createElement('p');\n  planetParagraph.textContent = (`This is ${planet.name}. It's orbit is ${planet.orbit}\n  A day on ${planet.name} is approximately ${planet.day} Earth days. It is\n  ${planet.surfaceArea} times the size of Earth. ${planet.name} has a volume of ${planet.volume}\n  compared to Earth. Its gravitational pull is ${planet.gravity} of Earth and it\n  has ${planet.moons}. Here is a photo wot I took on my holidays:`)\n  const planetPhoto = document.createElement('img');\n  console.dir(planetPhoto);\n  planetPhoto.src = planet.image;\n\n  resultSection.appendChild(planetParagraph);\n  resultSection.appendChild(planetPhoto);\n};\n\n\nmodule.exports = DisplayPlanet;\n\n\n//# sourceURL=webpack:///./src/views/display_planet.js?");
 
 /***/ }),
 

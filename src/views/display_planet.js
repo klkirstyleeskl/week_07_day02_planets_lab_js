@@ -21,9 +21,12 @@ DisplayPlanet.prototype.renderInfo = function (planet) {
   ${planet.surfaceArea} times the size of Earth. ${planet.name} has a volume of ${planet.volume}
   compared to Earth. Its gravitational pull is ${planet.gravity} of Earth and it
   has ${planet.moons}. Here is a photo wot I took on my holidays:`)
-  const.
+  const planetPhoto = document.createElement('img');
+  console.dir(planetPhoto);
+  planetPhoto.src = planet.image;
 
   resultSection.appendChild(planetParagraph);
+  resultSection.appendChild(planetPhoto);
 };
 
 
