@@ -10,6 +10,7 @@ const SolarSystem = function(planets) {
     console.log(planetIndex);
     const planetResult = this.getPlanet(planetIndex);
     console.log(planetResult);
+    PubSub.publish('SolarSystem:planet-selected', planetResult);
   });
 };
 

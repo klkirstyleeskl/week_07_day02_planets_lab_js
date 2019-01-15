@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const planetsData = __webpack_require__(/*! ./data/planets.js */ \"./src/data/planets.js\");\nconst SolarSystem = __webpack_require__(/*! ./models/solar_system.js */ \"./src/models/solar_system.js\");\nconst NavView = __webpack_require__(/*! ./views/nav_view.js */ \"./src/views/nav_view.js\");\n\ndocument.addEventListener('DOMContentLoaded', () => {\n  const planetsDataModel = new SolarSystem(planetsData);\n  console.log(planetsDataModel.planets);\n\n  const navView = new NavView();\n  navView.bindEvents();\n\n  const solarSystem = new SolarSystem(planetsData);\n  solarSystem.bindEvents();\n\n\n\n\n\n});\n\n\n//# sourceURL=webpack:///./src/app.js?");
+eval("const planetsData = __webpack_require__(/*! ./data/planets.js */ \"./src/data/planets.js\");\nconst SolarSystem = __webpack_require__(/*! ./models/solar_system.js */ \"./src/models/solar_system.js\");\nconst NavView = __webpack_require__(/*! ./views/nav_view.js */ \"./src/views/nav_view.js\");\nconst DisplayPlanet = __webpack_require__(/*! ./views/display_planet.js */ \"./src/views/display_planet.js\");\ndocument.addEventListener('DOMContentLoaded', () => {\n  const planetsDataModel = new SolarSystem(planetsData);\n  console.log(planetsDataModel.planets);\n\n  const navView = new NavView();\n  navView.bindEvents();\n\n  const solarSystem = new SolarSystem(planetsData);\n  solarSystem.bindEvents();\n\n  const displayPlanet = new DisplayPlanet();\n  displayPlanet.bindEvents();\n\n});\n\n\n//# sourceURL=webpack:///./src/app.js?");
 
 /***/ }),
 
@@ -126,7 +126,18 @@ eval("const PubSub = {\n  publish: function(channel, payload){\n    console.log(
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const PubSub = __webpack_require__(/*! ../helpers/pub_sub.js */ \"./src/helpers/pub_sub.js\");\n\nconst SolarSystem = function(planets) {\n  this.planets = planets;\n};\n\n  SolarSystem.prototype.bindEvents = function () {\n    PubSub.subscribe('NavView:button-clicked', (event) => {\n    const planetIndex = event.detail;\n    console.log(planetIndex);\n    const planetResult = this.getPlanet(planetIndex);\n    console.log(planetResult);\n  });\n};\n\n  SolarSystem.prototype.getPlanet = function (index) {\n    return this.planets[index];\n};\n\n\nmodule.exports = SolarSystem;\n\n\n//# sourceURL=webpack:///./src/models/solar_system.js?");
+eval("const PubSub = __webpack_require__(/*! ../helpers/pub_sub.js */ \"./src/helpers/pub_sub.js\");\n\nconst SolarSystem = function(planets) {\n  this.planets = planets;\n};\n\n  SolarSystem.prototype.bindEvents = function () {\n    PubSub.subscribe('NavView:button-clicked', (event) => {\n    const planetIndex = event.detail;\n    console.log(planetIndex);\n    const planetResult = this.getPlanet(planetIndex);\n    console.log(planetResult);\n    PubSub.publish('SolarSystem:planet-selected', planetResult);\n  });\n};\n\n  SolarSystem.prototype.getPlanet = function (index) {\n    return this.planets[index];\n};\n\n\nmodule.exports = SolarSystem;\n\n\n//# sourceURL=webpack:///./src/models/solar_system.js?");
+
+/***/ }),
+
+/***/ "./src/views/display_planet.js":
+/*!*************************************!*\
+  !*** ./src/views/display_planet.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("throw new Error(\"Module parse failed: Unexpected token (24:7)\\nYou may need an appropriate loader to handle this file type.\\n|   compared to Earth. Its gravitational pull is ${planet.gravity} of Earth and it\\n|   has ${planet.moons}. Here is a photo wot I took on my holidays:`)\\n>   const.\\n| \\n|   resultSection.appendChild(planetParagraph);\");\n\n//# sourceURL=webpack:///./src/views/display_planet.js?");
 
 /***/ }),
 
