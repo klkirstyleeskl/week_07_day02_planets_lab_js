@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const navView = new NavView();
   navView.bindEvents();
 
-
+  const solarSystem = new SolarSystem(planetsData);
+  solarSystem.bindEvents();
 
 
 

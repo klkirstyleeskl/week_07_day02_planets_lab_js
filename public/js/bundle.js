@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const planetsData = __webpack_require__(/*! ./data/planets.js */ \"./src/data/planets.js\");\nconst SolarSystem = __webpack_require__(/*! ./models/solar_system.js */ \"./src/models/solar_system.js\");\nconst NavView = __webpack_require__(/*! ./views/nav_view.js */ \"./src/views/nav_view.js\");\n\ndocument.addEventListener('DOMContentLoaded', () => {\n  const planetsDataModel = new SolarSystem(planetsData);\n  console.log(planetsDataModel.planets);\n\n  const navView = new NavView();\n  navView.bindEvents();\n\n\n\n\n\n\n\n});\n\n\n//# sourceURL=webpack:///./src/app.js?");
+eval("const planetsData = __webpack_require__(/*! ./data/planets.js */ \"./src/data/planets.js\");\nconst SolarSystem = __webpack_require__(/*! ./models/solar_system.js */ \"./src/models/solar_system.js\");\nconst NavView = __webpack_require__(/*! ./views/nav_view.js */ \"./src/views/nav_view.js\");\n\ndocument.addEventListener('DOMContentLoaded', () => {\n  const planetsDataModel = new SolarSystem(planetsData);\n  console.log(planetsDataModel.planets);\n\n  const navView = new NavView();\n  navView.bindEvents();\n\n  const solarSystem = new SolarSystem(planetsData);\n  solarSystem.bindEvents();\n\n\n\n\n\n});\n\n\n//# sourceURL=webpack:///./src/app.js?");
 
 /***/ }),
 
@@ -124,9 +124,9 @@ eval("const PubSub = {\n  publish: function(channel, payload){\n    console.log(
   !*** ./src/models/solar_system.js ***!
   \************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-eval("const SolarSystem = function(planets) {\n  this.planets = planets;\n};\n\n\nmodule.exports = SolarSystem;\n\n\n//# sourceURL=webpack:///./src/models/solar_system.js?");
+eval("const PubSub = __webpack_require__(/*! ../helpers/pub_sub.js */ \"./src/helpers/pub_sub.js\");\n\nconst SolarSystem = function(planets) {\n  this.planets = planets;\n};\n\n  SolarSystem.prototype.bindEvents = function () {\n    PubSub.subscribe('NavView:button-clicked', (event) => {\n    const planetIndex = event.detail;\n    console.log(planetIndex);\n    const planetResult = this.getPlanet(planetIndex);\n    console.log(planetResult);\n  });\n};\n\n  SolarSystem.prototype.getPlanet = function (index) {\n    return this.planets[index];\n};\n\n\nmodule.exports = SolarSystem;\n\n\n//# sourceURL=webpack:///./src/models/solar_system.js?");
 
 /***/ }),
 
@@ -137,7 +137,7 @@ eval("const SolarSystem = function(planets) {\n  this.planets = planets;\n};\n\n
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const PubSub = __webpack_require__(/*! ../helpers/pub_sub.js */ \"./src/helpers/pub_sub.js\");\n\nconst NavView = function () {\n\n};\n\nNavView.prototype.bindEvents = function () {\nconst mercuryButton = document.querySelector('#Mercury');\nmercuryButton.addEventListener('click', (event) => {\n  console.log('I clicked Mercury');\n  PubSub.publish('NavView:button-clicked', 0);\n});\n\nconst venusButton = document.querySelector('#Venus');\n\nconst earthButton = document.querySelector('#Earth');\n\nconst marsButton = document.querySelector('#Mars');\n\nconst jupiterButton = document.querySelector('#Jupiter');\n\nconst saturnButton = document.querySelector('#Saturn');\n\nconst uranusButton = document.querySelector('#Uranus');\n\nconst neptuneButton = document.querySelector('#Neptune');\nconsole.log(mercuryButton);\n\n\n\n};\n\n\nmodule.exports = NavView;\n\n\n//# sourceURL=webpack:///./src/views/nav_view.js?");
+eval("const PubSub = __webpack_require__(/*! ../helpers/pub_sub.js */ \"./src/helpers/pub_sub.js\");\n\nconst NavView = function () {\n\n};\n\nNavView.prototype.bindEvents = function () {\nconst mercuryButton = document.querySelector('#Mercury');\nmercuryButton.addEventListener('click', (event) => {\n  console.log('I clicked Mercury');\n  PubSub.publish('NavView:button-clicked', 0);\n});\n\nconst venusButton = document.querySelector('#Venus');\nvenusButton.addEventListener('click', (event) => {\n  console.log('I clicked Venus');\n  PubSub.publish('NavView:button-clicked', 1);\n});\n\nconst earthButton = document.querySelector('#Earth');\nearthButton.addEventListener('click', (event) => {\n  console.log('I clicked Earth');\n  PubSub.publish('NavView:button-clicked', 2);\n});\n\nconst marsButton = document.querySelector('#Mars');\nmarsButton.addEventListener('click', (event) => {\n  console.log('I clicked Mars');\n  PubSub.publish('NavView:button-clicked', 3);\n});\n\nconst jupiterButton = document.querySelector('#Jupiter');\njupiterButton.addEventListener('click', (event) => {\n  console.log('I clicked Jupiter');\n  PubSub.publish('NavView:button-clicked', 4);\n});\n\nconst saturnButton = document.querySelector('#Saturn');\nsaturnButton.addEventListener('click', (event) => {\n  console.log('I clicked Saturn');\n  PubSub.publish('NavView:button-clicked', 5);\n});\n\nconst uranusButton = document.querySelector('#Uranus');\nuranusButton.addEventListener('click', (event) => {\n  console.log('I clicked Uranus');\n  PubSub.publish('NavView:button-clicked', 6);\n});\n\nconst neptuneButton = document.querySelector('#Neptune');\nconsole.log(mercuryButton);\nneptuneButton.addEventListener('click', (event) => {\n  console.log('I clicked Neptune');\n  PubSub.publish('NavView:button-clicked', 7);\n});\n\n\n};\n\n\nmodule.exports = NavView;\n\n\n//# sourceURL=webpack:///./src/views/nav_view.js?");
 
 /***/ })
 
