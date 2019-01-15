@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const planetsData = __webpack_require__(/*! ./data/planets.js */ \"./src/data/planets.js\");\nconst SolarSystem = __webpack_require__(/*! ./models/solar_system.js */ \"./src/models/solar_system.js\");\n\ndocument.addEventListener('DOMContentLoaded', () => {\n  const planetsDataModel = new SolarSystem(planetsData);\n  console.log(planetsDataModel.planets);\n});\n\n\n//# sourceURL=webpack:///./src/app.js?");
+eval("const planetsData = __webpack_require__(/*! ./data/planets.js */ \"./src/data/planets.js\");\nconst SolarSystem = __webpack_require__(/*! ./models/solar_system.js */ \"./src/models/solar_system.js\");\nconst NavView = __webpack_require__(/*! ./views/nav_view.js */ \"./src/views/nav_view.js\");\n\ndocument.addEventListener('DOMContentLoaded', () => {\n  const planetsDataModel = new SolarSystem(planetsData);\n  console.log(planetsDataModel.planets);\n\n  const navView = new NavView();\n  navView.bindEvents();\n\n\n\n\n\n\n\n});\n\n\n//# sourceURL=webpack:///./src/app.js?");
 
 /***/ }),
 
@@ -108,6 +108,17 @@ eval("const planets = [\n  {\n    name: 'Mercury',\n    orbit: 87.969,\n    day:
 
 /***/ }),
 
+/***/ "./src/helpers/pub_sub.js":
+/*!********************************!*\
+  !*** ./src/helpers/pub_sub.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("const PubSub = {\n  publish: function(channel, payload){\n    console.log(`published on channel: ${channel}. payload: ${payload}`);\n    const event = new CustomEvent(channel, {\n      detail: payload\n    });\n    document.dispatchEvent(event);\n  },\n\n  subscribe: function(channel, callback){\n    console.log(`subscribed to channel: ${channel}`);\n    document.addEventListener(channel, callback);\n  }\n};\n\nmodule.exports = PubSub;\n\n\n//# sourceURL=webpack:///./src/helpers/pub_sub.js?");
+
+/***/ }),
+
 /***/ "./src/models/solar_system.js":
 /*!************************************!*\
   !*** ./src/models/solar_system.js ***!
@@ -116,6 +127,17 @@ eval("const planets = [\n  {\n    name: 'Mercury',\n    orbit: 87.969,\n    day:
 /***/ (function(module, exports) {
 
 eval("const SolarSystem = function(planets) {\n  this.planets = planets;\n};\n\n\nmodule.exports = SolarSystem;\n\n\n//# sourceURL=webpack:///./src/models/solar_system.js?");
+
+/***/ }),
+
+/***/ "./src/views/nav_view.js":
+/*!*******************************!*\
+  !*** ./src/views/nav_view.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("const PubSub = __webpack_require__(/*! ../helpers/pub_sub.js */ \"./src/helpers/pub_sub.js\");\n\nconst NavView = function () {\n\n};\n\nNavView.prototype.bindEvents = function () {\nconst mercuryButton = document.querySelector('#Mercury');\nconst venusButton = document.querySelector('#Venus');\nconst earthButton = document.querySelector('#Earth');\nconst marsButton = document.querySelector('#Mars');\nconst jupiterButton = document.querySelector('#Jupiter');\nconst saturnButton = document.querySelector('#Saturn');\nconst uranusButton = document.querySelector('#Uranus');\nconsole.log(mercuryButton);\n  menu.addEventListener('click', (event) => {\n      console.log('testing');\n});\n\n\n};\n\n\nmodule.exports = NavView;\n\n\n//# sourceURL=webpack:///./src/views/nav_view.js?");
 
 /***/ })
 
